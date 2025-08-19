@@ -1,0 +1,97 @@
+body {
+    font-family: 'Inter', sans-serif;
+    touch-action: manipulation; /* 모바일에서 더블 탭 확대 방지 */
+}
+.character, .boat-item {
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    user-select: none; /* 텍스트 선택 방지 */
+}
+.character:hover, .boat-item:hover {
+    transform: scale(1.1);
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2));
+}
+.boat {
+    transition: left 0.8s ease-in-out;
+}
+.left {
+    left: 25%;
+}
+.right {
+    left: 75%;
+}
+.message-box {
+    animation: fadeIn 0.5s ease-out;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* 물결 애니메이션 */
+@keyframes wave {
+  0% { transform: translateX(-50%) rotate(0deg); }
+  100% { transform: translateX(0) rotate(360deg); }
+}
+
+/* Tab Styles */
+#myTab .border-b-2 {
+    border-color: transparent;
+}
+#myTab .aria-selected\:true, #myTab [aria-selected="true"] {
+    color: #2563eb;
+    border-color: #2563eb;
+}
+
+/* Tree Visualization Styles */
+#tree-container {
+    position: relative; /* For SVG positioning */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px; /* Increased gap for lines */
+    padding: 20px;
+    min-width: max-content;
+}
+
+.tree-level {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    z-index: 1; /* Ensure nodes are above lines */
+}
+
+.tree-node {
+    padding: 10px 15px;
+    border: 2px solid #9ca3af;
+    border-radius: 8px;
+    background-color: #f9fafb;
+    font-size: 1.1rem; /* Slightly larger font */
+    white-space: nowrap; /* Prevent line breaks */
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    position: relative;
+    z-index: 1; /* Ensure nodes are above lines */
+}
+
+.tree-node.goal-state {
+    border-color: #16a34a;
+    background-color: #f0fdf4;
+}
+
+.tree-node.invalid-node {
+    border-color: #ef4444; /* red-500 */
+    background-color: #fee2e2; /* red-100 */
+    color: #b91c1c; /* red-800 */
+}
+
+.tree-lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0; /* Lines behind nodes */
+    overflow: visible;
+}
