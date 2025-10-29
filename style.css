@@ -46,20 +46,20 @@ body {
 
 /* Tree Visualization Styles */
 #tree-container {
-    position: relative; /* For SVG positioning */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 40px; /* Increased gap for lines */
+    position: relative;
+    width: 100%;
+    min-height: 500px; /* 충분한 높이 확보 */
     padding: 20px;
-    min-width: max-content;
+    overflow: auto;
 }
 
 .tree-level {
     display: flex;
     justify-content: center;
     gap: 20px;
-    z-index: 1; /* Ensure nodes are above lines */
+    position: absolute; /* JS가 위치를 제어 */
+    width: 100%;
+    left: 0;
 }
 
 .tree-node {
@@ -67,12 +67,19 @@ body {
     border: 2px solid #9ca3af;
     border-radius: 8px;
     background-color: #f9fafb;
-    font-size: 1.1rem; /* Slightly larger font */
-    white-space: nowrap; /* Prevent line breaks */
+    font-size: 1.1rem;
+    white-space: nowrap;
     text-align: center;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     position: relative;
-    z-index: 1; /* Ensure nodes are above lines */
+    z-index: 1;
+    cursor: pointer; /* 클릭 가능 표시 */
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.tree-node:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 .tree-node.goal-state {
@@ -81,9 +88,10 @@ body {
 }
 
 .tree-node.invalid-node {
-    border-color: #ef4444; /* red-500 */
-    background-color: #fee2e2; /* red-100 */
-    color: #b91c1c; /* red-800 */
+    border-color: #ef4444;
+    background-color: #fee2e2;
+    color: #b91c1c;
+    cursor: not-allowed;
 }
 
 .tree-lines {
@@ -92,6 +100,10 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 0; /* Lines behind nodes */
+    z-index: 0;
     overflow: visible;
+}
+
+.tree-node .font-mono {
+    color: #4b5563; /* gray-600 */
 }
